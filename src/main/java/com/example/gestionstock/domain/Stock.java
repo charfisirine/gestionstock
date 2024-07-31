@@ -1,12 +1,11 @@
 package com.example.gestionstock.domain;
 
-import jakarta.persistence.Entity;
-import jakarta.persistence.GeneratedValue;
-import jakarta.persistence.GenerationType;
-import jakarta.persistence.Id;
 import java.io.Serializable;
 import jakarta.persistence.*;
 import java.time.LocalDate;
+import java.util.List;
+import com.example.gestionstock.dto.ArticleDTO;
+import io.micrometer.common.lang.NonNull;
 
 @Entity
 public class Stock implements Serializable {
@@ -23,8 +22,10 @@ public class Stock implements Serializable {
     @JoinColumn(name = "idDepot")
     private Depot depot;
 
+    @NonNull
     private Integer quantity;
     private LocalDate datePeremption;
+
 
 
     public Integer getIdStock() {

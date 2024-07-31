@@ -1,17 +1,37 @@
 package com.example.gestionstock.dto;
 import com.fasterxml.jackson.annotation.JsonInclude;
-import java.util.Collection;
 import java.time.LocalDate;
-
 @JsonInclude(JsonInclude.Include.NON_NULL)
 
 public class StockDTO {
     private Integer idStock;
     private Integer idArticle; 
-    private Integer idDepot;   
+    private Integer idDepot;  
     private Integer quantity;
     private LocalDate datePeremption;
-    Collection<ArticleDTO> articles;
+
+
+    public Integer getIdDepot() {
+        return idDepot;
+    }
+
+    public void setIdDepot(Integer idDepot) {
+        this.idDepot = idDepot;
+    }
+
+
+
+
+
+    public Integer getIdArticle() {
+        return idArticle;
+    }
+
+    public void setIdArticle(Integer idArticle) {
+        this.idArticle = idArticle;
+    }
+
+
 
 
     public Integer getIdStock() {
@@ -22,21 +42,8 @@ public class StockDTO {
         this.idStock = idStock;
     }
 
-    public Integer getIdArticle() {
-        return idArticle;
-    }
+ 
 
-    public void setIdArticle(Integer idArticle) {
-        this.idArticle = idArticle;
-    }
-
-    public Integer getIdDepot() {
-        return idDepot;
-    }
-
-    public void setIdDepot(Integer idDepot) {
-        this.idDepot = idDepot;
-    }
 
     public Integer getQuantity() {
         return quantity;
@@ -54,12 +61,7 @@ public class StockDTO {
         this.datePeremption = datePeremption;
     }
 
-    public Collection<ArticleDTO> getArticles() {
-        return articles;
-    }
 
-    public void setArticles(Collection<ArticleDTO> articles) {
-        this.articles = articles;
-    }
 }
 
+ 
