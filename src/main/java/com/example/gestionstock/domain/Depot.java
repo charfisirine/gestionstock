@@ -26,6 +26,9 @@ public class Depot implements Serializable {
     @JsonIgnore
     private Collection<Stock> stocks;
 
+    public Depot() {
+    }
+
 
     public Integer getIdDepot() {
         return idDepot;

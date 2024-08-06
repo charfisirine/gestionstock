@@ -1,6 +1,5 @@
 package com.example.gestionstock.web.rest;
 
-import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.ResponseEntity;
 import org.springframework.validation.BindingResult;
 import org.springframework.validation.FieldError;
@@ -17,21 +16,22 @@ import org.springframework.web.bind.annotation.DeleteMapping;
 import java.net.URI;
 import java.net.URISyntaxException;
 import java.util.Collection;
-import java.util.List;
-import com.example.gestionstock.repository.ArticleRepository;
+
 import com.example.gestionstock.util.RestPreconditions;
-import com.example.service.ArticleService;
+import com.example.gestionstock.service.ArticleService;
 import com.example.gestionstock.domain.Article;
 import com.example.gestionstock.dto.ArticleDTO;
-import com.example.gestionstock.factory.ArticleFactory;
 
 @RestController
 @RequestMapping("/api/articles")
 public class ArticleRessource {
-    @Autowired
-     private  ArticleService articleService;
-     private static final String ENTITY_NAME = "Article";    
-    
+   // @Autowired
+     private final ArticleService articleService;
+     private static final String ENTITY_NAME = "Article";  
+
+     public ArticleRessource(ArticleService articleService) {
+        this.articleService = articleService;
+    }
     @GetMapping
     public Collection<ArticleDTO> findAll() {
         return articleService.findAll();

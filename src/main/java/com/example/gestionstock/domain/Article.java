@@ -26,10 +26,11 @@ public class Article implements Serializable {
     @OneToMany(mappedBy = "article",cascade = CascadeType.ALL,fetch = FetchType.EAGER,orphanRemoval=true)
     @JsonIgnore
     private Collection<Stock> stocks;
-    
 
-    
- 
+    public Article() {
+    }
+
+
     public Integer getIdArticle() {
         return idArticle;
     }

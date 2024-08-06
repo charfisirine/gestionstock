@@ -3,9 +3,6 @@ package com.example.gestionstock.domain;
 import java.io.Serializable;
 import jakarta.persistence.*;
 import java.time.LocalDate;
-import java.util.List;
-import com.example.gestionstock.dto.ArticleDTO;
-import io.micrometer.common.lang.NonNull;
 
 @Entity
 public class Stock implements Serializable {
@@ -22,11 +19,12 @@ public class Stock implements Serializable {
     @JoinColumn(name = "idDepot")
     private Depot depot;
 
-    @NonNull
+    @Column(nullable = false)
     private Integer quantity;
+
     private LocalDate datePeremption;
 
-
+    // Getters and Setters
 
     public Integer getIdStock() {
         return idStock;
@@ -68,6 +66,5 @@ public class Stock implements Serializable {
         this.datePeremption = datePeremption;
     }
 
-}
-   
 
+}

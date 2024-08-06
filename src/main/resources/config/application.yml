@@ -36,3 +36,6 @@ spring:
       name: user
       password: password
 
+  delete-article-without-check: true
+  delete-depot-without-check: true
+  delete-stock-without-check: true

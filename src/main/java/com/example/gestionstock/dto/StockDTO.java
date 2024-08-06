@@ -1,38 +1,31 @@
 package com.example.gestionstock.dto;
-import com.fasterxml.jackson.annotation.JsonInclude;
-import java.time.LocalDate;
-@JsonInclude(JsonInclude.Include.NON_NULL)
 
+import com.fasterxml.jackson.annotation.JsonInclude;
+import org.jetbrains.annotations.NotNull;
+
+import java.time.LocalDate;
+//import javax.validation.constraints.NotNull;
+
+/**
+ * Data Transfer Object for Stock.
+ */
+@JsonInclude(JsonInclude.Include.NON_NULL)
 public class StockDTO {
+    
     private Integer idStock;
-    private Integer idArticle; 
-    private Integer idDepot;  
+    
+    @NotNull
+    private Integer idArticle;
+    
+    @NotNull
+    private Integer idDepot;
+    
+    @NotNull
     private Integer quantity;
+    
     private LocalDate datePeremption;
 
-
-    public Integer getIdDepot() {
-        return idDepot;
-    }
-
-    public void setIdDepot(Integer idDepot) {
-        this.idDepot = idDepot;
-    }
-
-
-
-
-
-    public Integer getIdArticle() {
-        return idArticle;
-    }
-
-    public void setIdArticle(Integer idArticle) {
-        this.idArticle = idArticle;
-    }
-
-
-
+    // Getters and Setters
 
     public Integer getIdStock() {
         return idStock;
@@ -42,8 +35,21 @@ public class StockDTO {
         this.idStock = idStock;
     }
 
- 
+    public Integer getIdArticle() {
+        return idArticle;
+    }
 
+    public void setIdArticle(Integer idArticle) {
+        this.idArticle = idArticle;
+    }
+
+    public Integer getIdDepot() {
+        return idDepot;
+    }
+
+    public void setIdDepot(Integer idDepot) {
+        this.idDepot = idDepot;
+    }
 
     public Integer getQuantity() {
         return quantity;
@@ -60,8 +66,4 @@ public class StockDTO {
     public void setDatePeremption(LocalDate datePeremption) {
         this.datePeremption = datePeremption;
     }
-
-
 }
-
- 

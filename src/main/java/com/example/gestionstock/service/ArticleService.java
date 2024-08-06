@@ -1,23 +1,31 @@
-package com.example.service;
+package com.example.gestionstock.service;
 
-import java.util.List;
+import java.math.BigDecimal;
 import java.util.Collection;
-
-import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.stereotype.Service;
-import org.springframework.transaction.annotation.Transactional;
+import java.util.Optional;
 
 import com.example.gestionstock.domain.Article;
+import com.example.gestionstock.domain.Stock;
 import com.example.gestionstock.dto.ArticleDTO;
 import com.example.gestionstock.factory.ArticleFactory;
 import com.example.gestionstock.repository.ArticleRepository;
+import com.google.common.base.Preconditions;
+import org.springframework.beans.factory.annotation.Value;
+import org.springframework.stereotype.Service;
+import org.springframework.transaction.annotation.Transactional;
 
 @Service
 @Transactional
 public class ArticleService {
 
-    @Autowired
-    private ArticleRepository articleRepository;
+    private final ArticleRepository articleRepository;
+
+    public ArticleService(ArticleRepository articleRepository) {
+        this.articleRepository = articleRepository;
+    }
+
+//    @Value("${delete-article-without-check}")
+//    private boolean deleteArticleWithoutCheck;
 
     @Transactional(readOnly = true)
     public Article findOne(Integer id) {
@@ -30,31 +38,23 @@ public class ArticleService {
         return ArticleFactory.articlesToCategorieDTOs(result);
     }
 
-
-    public ArticleDTO add(ArticleDTO article2) {
-        // Convert ArticleDTO to Article entity
-        Article article = ArticleFactory.articleDTOTOArticle(article2);
-        // Save the Article entity
+    public ArticleDTO add(ArticleDTO articleDTO) {
+        Article article = ArticleFactory.articleDTOTOArticle(articleDTO);
         article = articleRepository.save(article);
-        // Convert the saved Article entity back to ArticleDTO
         return ArticleFactory.articleTOarticleDTO(article);
     }
-    
 
     public ArticleDTO update(ArticleDTO articleDTO) {
-        //verifier si l'article existe dans la base ou non 
-        Article articleInBase = articleRepository.findOne(articleDTO.getIdArticle());
-        Preconditions.checkArgument(articleInBase != null, "Categore has been deleted");
-        // Convert ArticleDTO to Article entity
+        Article articleInBase = articleRepository.findById(articleDTO.getIdArticle()).orElse(null);
+        Preconditions.checkArgument(articleInBase != null, "Article has been deleted");
+
         Article article = ArticleFactory.articleDTOTOArticle(articleDTO);
-        // Save the Article entity
         article = articleRepository.save(article);
-        // Convert the saved Article entity back to ArticleDTO
         return ArticleFactory.articleTOarticleDTO(article);
     }
 
-
     public void deleteArticle(Integer id) {
+
         articleRepository.deleteById(id);
     }
 }
